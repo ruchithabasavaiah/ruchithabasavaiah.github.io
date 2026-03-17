@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruchitha Basavaiah — Software Engineer</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray: #888888;
+            --light: #f5f5f5;
+            --border: #e8e8e8;
+            --accent: #0066ff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-name {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--black); }
+
+        /* SECTIONS */
+        section {
+            padding: 6rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* HERO */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 60px;
+        }
+
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            width: 100%;
+        }
+
+        .hero-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 3px solid var(--border);
+        }
+
+        .hero-text h1 {
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-text .title {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            font-size: 16px;
+            color: #444;
+            max-width: 500px;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .btn-primary:hover { background: #333; }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--black);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover { background: var(--light); }
+
+        /* SECTION HEADERS */
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        /* SKILLS */
+        #skills { background: var(--light); max-width: 100%; padding: 4rem 2rem; }
+        .skills-inner { max-width: 900px; margin: 0 auto; }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-group h3 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .skill-group p {
+            font-size: 14px;
+            color: var(--black);
+            line-height: 1.8;
+        }
+
+        /* PROJECTS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-card:hover {
+            border-color: #ccc;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-name {
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+
+        .project-badge {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 3px 8px;
+            border-radius: 20px;
+            background: #e8f4e8;
+            color: #2d7a2d;
+        }
+
+        .project-badge.inprogress {
+            background: #fff4e0;
+            color: #a05c00;
+        }
+
+        .project-desc {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            font-size: 12px;
+            padding: 3px 8px;
+            background: var(--light);
+            border-radius: 4px;
+            color: #444;
+        }
+
+        /* EXPERIENCE */
+        .experience-item {
+            display: grid;
+            grid-template-columns: 1fr 140px;
+            gap: 1rem;
+            padding: 1.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .experience-item:last-child { border-bottom: none; }
+
+        .exp-company {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 0.25rem;
+        }
+
+        .exp-role {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .exp-bullets {
+            list-style: none;
+            padding: 0;
+        }
+
+        .exp-bullets li {
+            font-size: 14px;
+            color: #444;
+            padding: 3px 0;
+            padding-left: 14px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .exp-bullets li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--gray);
+            font-size: 12px;
+        }
+
+        .exp-date {
+            font-size: 13px;
+            color: var(--gray);
+            text-align: right;
+            padding-top: 4px;
+        }
+
+        /* CERTIFICATIONS */
+        .cert-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .cert-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .cert-name {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .cert-issuer {
+            font-size: 13px;
+            color: var(--gray);
+            margin-top: 2px;
+        }
+
+        .cert-date {
+            font-size: 13px;
+            color: var(--gray);
+            white-space: nowrap;
+        }
+
+        /* CONTACT */
+        #contact {
+            text-align: center;
+            background: var(--black);
+            color: var(--white);
+            max-width: 100%;
+            padding: 5rem 2rem;
+        }
+
+        #contact h2 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 1rem;
+        }
+
+        #contact p {
+            color: #aaa;
+            font-size: 16px;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            padding: 10px 20px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .contact-links a:hover {
+            background: #111;
+            border-color: #555;
+        }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .hero-inner { flex-direction: column; gap: 2rem; }
+            .hero-text h1 { font-size: 30px; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .experience-item { grid-template-columns: 1fr; }
+            .exp-date { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <span class="nav-name">Ruchitha Basavaiah</span>
+    <ul class="nav-links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="hero-inner">
+        <img src="photo.jpeg" alt="Ruchitha Basavaiah" class="hero-photo">
+        <div class="hero-text">
+            <h1>Ruchitha Basavaiah</h1>
+            <p class="title">Software Engineer · Backend & AI</p>
+            <p>I build production systems, from distributed backends and e-commerce platforms to LLM-powered tools. Master's in Computer Science, University of Dayton.</p>
+            <div class="hero-links">
+                <a href="https://github.com/ruchithabasavaiah" class="btn btn-primary" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/ruchithabasavaiah" class="btn btn-secondary" target="_blank">LinkedIn</a>
+                <a href="mailto:ruchithabasavaiah@gmail.com" class="btn btn-secondary">Email</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<div id="skills">
+    <div class="skills-inner">
+        <p class="section-label">Technical Skills</p>
+        <div class="skills-grid">
+            <div class="skill-group">
+                <h3>Languages</h3>
+                <p>Python · Java · JavaScript · TypeScript · SQL · HTML · CSS · React</p>
+            </div>
+            <div class="skill-group">
+                <h3>Backend & Distributed</h3>
+                <p>Node.js · Express · Spring Boot · Apache Kafka · REST APIs · Microservices · Prisma ORM</p>
+            </div>
+            <div class="skill-group">
+                <h3>Tools & DevOps</h3>
+                <p>Docker · Git/GitHub · AWS · CI/CD · Stripe API</p>
+            </div>
+            <div class="skill-group">
+                <h3>AI & APIs</h3>
+                <p>Anthropic Claude API · Alpaca Markets API</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+    <p class="section-label">Projects</p>
+    <div class="projects-grid">
+
+        <a href="https://github.com/ruchithabasavaiah/stock-analyser" class="project-card" target="_blank">
+            <div class="project-header">
+                <span class="project-name">Stock Analyzer</span>
+                <span class="project-badge">Live</span>
+            </div>
+            <p class="project-desc">AI-powered stock analysis tool comparing 3 LLM prompting strategies. Few-shot was 3x faster than chain-of-thought (3630ms vs 11124ms avg) with 100% format accuracy across all runs. Real-time streaming interface deployed on Railway.</p>
+            <div class="project-tags">
+                <span class="tag">Python</span>
+                <span class="tag">Claude API</span>
+                <span class="tag">Alpaca Markets</span>
+                <span class="tag">Flask</span>
+                <span class="tag">SSE</span>
+                <span class="tag">Railway</span>
+            </div>
+        </a>
+
+        <a href="https://github.com/ruchithabasavaiah/Kefi" class="project-card" target="_blank">
+            <div class="project-header">
+                <span class="project-name">KEFI — E-Commerce Platform</span>
+                <span class="project-badge inprogress">In Progress</span>
+            </div>
+            <p class="project-desc">Production e-commerce platform with 15+ REST APIs supporting 400+ SKUs. JWT authentication, RBAC, atomic database transactions eliminating oversell bugs, Stripe webhook integration, and full AWS deployment.</p>
+            <div class="project-tags">
+                <span class="tag">Node.js</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Prisma</span>
+                <span class="tag">Stripe</span>
+                <span class="tag">AWS</span>
+            </div>
+        </a>
+
+        <a href="https://github.com/ruchithabasavaiah" class="project-card" target="_blank">
+            <div class="project-header">
+                <span class="project-name">Order Tracking System</span>
+                <span class="project-badge">Complete</span>
+            </div>
+            <p class="project-desc">Event-driven order pipeline across 3 Spring Boot microservices using Apache Kafka. Real-time SSE dashboard streaming live KPIs. Containerized with Docker Compose.</p>
+            <div class="project-tags">
+                <span class="tag">Java</span>
+                <span class="tag">Spring Boot</span>
+                <span class="tag">Apache Kafka</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">Docker</span>
+                <span class="tag">SSE</span>
+            </div>
+        </a>
+
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+    <p class="section-label">Experience</p>
+
+    <div class="experience-item">
+        <div>
+            <p class="exp-company">Coding Minds, Inc.</p>
+            <p class="exp-role">Software Engineer</p>
+            <ul class="exp-bullets">
+                <li>Design and develop the academic management system using web service technologies</li>
+                <li>Perform Requirement analysis, Designing, Development and Deployment using agile development methodology</li>
+                <li>Perform testing using dev tools, POSTMAN and perform operations on full-stack web services with MySQL</li>
+                <li>Experience in developing RESTful services using Spring Boot, Spring JPA, Spring MVC and perform CRUD</li>
+                <li>Utilize React for frontend and Spring Boot for backend development and deploying the application with Heroku</li>
+            </ul>
+        </div>
+        <p class="exp-date">Feb 2026 — Present</p>
+
+        <div>
+            <p class="exp-company">University of Dayton</p>
+            <p class="exp-role">Techincal Support Representative</p>
+            <ul class="exp-bullets">
+                <li>Resolved 100+ technical tickets via TDX, ensuring 99% operational uptime for mission-critical classroom systems</li>
+                <li>Identified root causes of OS and network failures, preventing recurring system downtime for faculty and staff</li>
+                <li>Provisioned licensed software across Windows/macOS, ensuring 99.9% environment consistency for 200+ users</li>
+            </ul>
+        </div>
+        <p class="exp-date">Aug 2025 — Dec 2025</p>
+    </div>
+
+</section>
+
+<hr class="divider">
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+    <p class="section-label">Certifications</p>
+    <div class="cert-list">
+        <div class="cert-item">
+            <div>
+                <p class="cert-name">Prompt Engineering & Programming with OpenAI</p>
+                <p class="cert-issuer">Columbia+</p>
+            </div>
+            <p class="cert-date">July 2025</p>
+        </div>
+        <div class="cert-item">
+            <div>
+                <p class="cert-name">Intro to MCP</p>
+                <p class="cert-issuer">Anthropic Academy</p>
+            </div>
+            <p class="cert-date">In Progress</p>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<div id="contact">
+    <h2>Let's work together</h2>
+    <p>Open to Software Engineer roles — backend, full-stack, and AI-powered systems.</p>
+    <div class="contact-links">
+        <a href="mailto:ruchithabasavaiah@gmail.com">ruchithabasavaiah@gmail.com</a>
+        <a href="https://linkedin.com/in/ruchithabasavaiah" target="_blank">LinkedIn</a>
+        <a href="https://github.com/ruchithabasavaiah" target="_blank">GitHub</a>
+    </div>
+</div>
+
+</body>
+</html>
